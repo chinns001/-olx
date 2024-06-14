@@ -19,6 +19,9 @@ function Header (){
 
            <Link to="/">   HOME  </Link>
 
+           <input className='search' type='text'/>
+           <button> SEARCH </button>
+
            <span className='mt-3'> SELL & PURCHASE ONLINE ... In Your City. </span> 
 
            {!localStorage.getItem('token') ?

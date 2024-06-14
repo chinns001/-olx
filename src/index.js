@@ -6,7 +6,7 @@ import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
+  Rout,
   Link,
 } from "react-router-dom";
 import Home from './components/Home';

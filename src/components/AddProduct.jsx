@@ -8,6 +8,7 @@ import axios from "axios";
 function AddProduct(){
 
    const navigate = useNavigate()
+
    const [pname, setpname ] = useState('');
    const [pdesc, setpdesc ] = useState('');
    const [price, setprice ] = useState('');
@@ -37,6 +38,11 @@ const url = 'http://localhost:8000/add-product';
    axios.post(url,formData)
    .then((res)  => {
       console.log(res)
+      if(res.data.message){
+         alert(res.data.message);
+            navigate('/')
+      
+      }
 
      })
     .catch((err)=>{
@@ -68,7 +74,8 @@ console.log(err)
      onChange={(e)=>{setcategory(e.target.value)}}>
       <option> Bikes </option>
       <option> Mobiles </option>
-      <option> cloths </option>
+      <option> Cloths </option>
+      <option> Cars </option>
      </select>
      <label> Product Image </label>
      <input className="form-control" type="file" 

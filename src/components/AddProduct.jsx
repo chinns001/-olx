@@ -37,7 +37,6 @@ const url = 'http://localhost:8000/add-product';
 
    axios.post(url,formData)
    .then((res)  => {
-      console.log(res)
       if(res.data.message){
          alert(res.data.message);
             navigate('/')
@@ -46,7 +45,7 @@ const url = 'http://localhost:8000/add-product';
 
      })
     .catch((err)=>{
-console.log(err)
+       alert('server err')
 
     })
 

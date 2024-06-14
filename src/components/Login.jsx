@@ -13,16 +13,15 @@ function Login (){
 
 
    const handleApi = () => {
-      console.log({ username, password  });
       const url = 'http://localhost:8000/login';
       const data = { username, password };
       axios.post(url, data)
           .then((res) => {
-                 console.log(res.data);
            if(res.data.message)  {
          alert(res.data.message);
          if(res.data.token){
             localStorage.setItem('token', res.data.token)
+            localStorage.setItem('userId', res.data.userId)
             Navigate('/');
          }
   
@@ -30,7 +29,6 @@ function Login (){
      })
   
      .catch((err) => {
-      console.log(err);
       alert('SERVER ERR')
   
     })

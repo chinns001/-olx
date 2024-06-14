@@ -2,7 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css'
 
-function Header (){ 
+function Header (props){ 
 
 
       const Navigate = useNavigate()
@@ -13,24 +13,35 @@ function Header (){
 
       }
     return ( 
-     <div>
+     <div className='header-container d-flex justify-content-between'>
            
            <div className="header">
 
-           <Link to="/">   HOME  </Link>
+           <Link className='links ' to="/">   HOME  </Link>
 
-           <input className='search' type='text'/>
-           <button> SEARCH </button>
+           <input className='search' 
+           type='text' 
+           value={props && props.search}
+           onChange={(e)=> props.handlesearch && props.handlesearch(e.target.value)
 
-           <span className='mt-3'> SELL & PURCHASE ONLINE ... In Your City. </span> 
+           }/>
+           <button className='search-btn' onClick={()=> props.handleClick && props.handleClick()} > SEARCH  </button>
+        
 
-           {!localStorage.getItem('token') ?
-                <Link to="/login">   LOGIN </Link> :
-               <button onClick={handlelogout}>  LOGOUT </button> }
+
 
           
            </div>
-           
+           <div>
+           { !!localStorage.getItem('token') && 
+           <Link  to="/add-product">
+             <button className="logout-btn"> ADD PRODUCT </button> 
+              </Link> }
+            
+           {!localStorage.getItem('token') ?
+                <Link to="/login">   LOGIN </Link> :
+               <button className='logout-btn'onClick={handlelogout}>  LOGOUT </button> }
+           </div>
     </div>
  
          )

@@ -10,12 +10,10 @@ function Signup()
    const [password ,setpassword ] = useState('');
 
    const handleApi = () => {
-    console.log({ username, password  });
     const url = 'http://localhost:8000/signup';
     const data = { username, password };
     axios.post(url, data)
         .then((res) => {
-               console.log(res.data);
          if(res.data.message)  {
        alert(res.data.message);
 
@@ -23,7 +21,6 @@ function Signup()
    })
 
    .catch((err) => {
-    console.log(err);
     alert('SERVER ERR')
 
   })

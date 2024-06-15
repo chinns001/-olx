@@ -75,6 +75,9 @@ const url = 'http://localhost:8000/add-product';
       <option> Mobiles </option>
       <option> Cloths </option>
       <option> Cars </option>
+      <option> House </option>
+      <option> Electronics </option>
+      
      </select>
      <label> Product Image </label>
      <input className="form-control" type="file" 

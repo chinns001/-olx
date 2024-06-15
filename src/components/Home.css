@@ -1,14 +1,15 @@
 
 .icons{
-    font-size: 32px;
-    height: 32px;
-    width: 32px;
-    color: #ddd;
-    cursor: pointer;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+    color:black;
+    cursor: #ddd;
   }
 
   .icons:hover{
-    color: red;
+    color:red;
+    
   }
 
   .icon-con{
@@ -17,8 +18,8 @@
     top: 0;
     right: 0;
     border-radius: 50%;
-    padding: 7px;
-    background-color:#eee;
+    padding: 8px;
+    background-color:white;
     margin: 7px;
   }
 
@@ -27,4 +28,9 @@ text-decoration: none;
 font-size:  24px; 
 color: #002f34;
 font-weight: bold;
+}
+
+.price-text{
+color: #002f34;
+
 }

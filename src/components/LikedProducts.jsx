@@ -3,9 +3,10 @@ import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Categories from "./Categories";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import './Home.css';
-function Home(){
+
+function LikedProducts(){
 
    const navigate = useNavigate()
 
@@ -24,11 +25,11 @@ const[search, setsearch ] = useState('');
 
 
 useEffect(()  =>  {
-   const url = 'http://localhost:8000/get-products';
+   const url = 'http://localhost:8000/liked-products';
     axios.get(url)
     .then((res)=>{
-      if (res.data.products){
-         setproducts(res.data.products);
+      if (res.data.Products){
+         setproducts(res.data.Products);
       }
     })
     .catch((err)=>{
@@ -85,17 +86,10 @@ const handleLike =(productId) =>{
   alert('Server Err.')
   })
  
-}
-
-
-const handleProduct = (id) =>{
-   navigate('/product/'+ id)
-
-
-
 
 
 }
+
  return (
    
    <div>
@@ -109,7 +103,7 @@ const handleProduct = (id) =>{
                     return (
                        <div key={item._id} className="card m-3">
                         <div onClick={() => handleLike(item._id)} className="icon-con"> 
-                       < FaRegHeart className="icons"/> 
+                       <FaHeart  className="icons"/> 
                          </div>
                         <img width= "500px" height="300px" src={ 'http://localhost:8000/' + item.pimage} />
                       <p className="m-2">  {item.pname} | {item.category} </p>
@@ -127,13 +121,13 @@ const handleProduct = (id) =>{
                  products.map((item, index) => {
                     
                     return (
-                       <div onClick ={(id) => handleProduct(item._id)} key={item._id} className="card m-3">
+                       <div key={item._id} className="card m-3">
                          <div  onClick={() => handleLike(item._id)} className="icon-con"> 
-                              < FaRegHeart className="icons"/> 
+                              <FaHeart className="icons"/> 
                          </div>
-                        <img width= "300px" height="200px" src={ 'http://localhost:8000/' + item.pimage} />
-                      <h3 className="m-2 price-text"> $ {item.price} </h3>
+                        <img width= "500px" height="300px" src={ 'http://localhost:8000/' + item.pimage} />
                       <p className="m-2">  {item.pname} | {item.category} </p>
+                      <h3 className="m-2 text-danger">  {item.price} </h3>
                       <p className=" m-2 text-success">  {item.pdesc} </p>
                       </div>
                     )
@@ -145,4 +139,4 @@ const handleProduct = (id) =>{
 )
 
 }
-export default Home;
+export default LikedProducts;

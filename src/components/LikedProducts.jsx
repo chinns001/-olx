@@ -28,6 +28,7 @@ useEffect(()  =>  {
    const url = 'http://localhost:8000/liked-products';
     axios.get(url)
     .then((res)=>{
+      console.log(res.data)
       if (res.data.Products){
          setproducts(res.data.Products);
       }

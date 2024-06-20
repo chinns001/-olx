@@ -15,8 +15,8 @@ useEffect(()  =>  {
      axios.get(url)
      .then((res) => {
         console.log(res)
-        if (res.data.product){
-          setproduct(res.data.product)
+        if (res.data.products){
+          setproduct(res.data.products)
 
         }
       
@@ -31,9 +31,23 @@ useEffect(()  =>  {
     return (
     <div>
     <Header/>
-   bfbgbggbvhvh
-    {product && product.pname}
+   PRODUCT DETAILS :
+        { product && <div>
+      <div> 
+          <img src={'http://localhost:8000/' + product.pimage} alt=""/>
+          </div>
+         <div>
+         {product.pname}
+         </div>      
+       </div>}
+    
+    
+    
     </div>
+
+
+
+
 
 )
 

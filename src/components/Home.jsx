@@ -12,6 +12,7 @@ function Home(){
 const[products, setproducts ] = useState([]);
 const[cproducts, setcproducts ] = useState([]);
 const[search, setsearch ] = useState(''); 
+const[issearch, setissearch ] = useState(false); 
    
 
 // useEffect(()  =>  {
@@ -44,14 +45,26 @@ setsearch(value);
 }
 
 const handleClick =() => {
-let filterProducts = products.filter((item)=>{
-   if(item.pname.toLowerCase().includes(search.toLowerCase()) ||
-    item.pdesc.toLowerCase().includes(search.toLowerCase()) || 
-    item.category.toLowerCase().includes(search.toLowerCase())) {
-      return item;
-   }
-})
- setcproducts(filterProducts)
+
+   const url = 'http://localhost:8000/search?search=' + search ;
+   axios.get(url)
+   .then((res) => {
+         setcproducts(res.data.products);
+         setissearch(true);
+
+     })
+  .catch((err)=>{
+  alert('Server Err.')
+  })
+
+//    let filterProducts = products.filter((item)=>{
+//    if(item.pname.toLowerCase().includes(search.toLowerCase()) ||
+//     item.pdesc.toLowerCase().includes(search.toLowerCase()) || 
+//     item.category.toLowerCase().includes(search.toLowerCase())) {
+//       return item;
+//    }
+// })
+//setcproducts(filterProducts)
 
 
 
@@ -101,8 +114,12 @@ const handleProduct = (id) =>{
    <div>
      <Header  search ={search} handlesearch={handlesearch} handleClick = {handleClick}/>
      <Categories handleCategory={handleCategory} />
-<h5>  SEARCH RESULT </h5>
-    <div className="d-flex justify-content-center flex-wrap">
+          {issearch && cproducts &&
+           <h5>  SEARCH RESULT
+            <button className= "clear-btn" onClick={() => setissearch(false)}> CLEAR </button>
+             </h5>}
+          {issearch && cproducts && cproducts.length == 0 && <h5> No Results Found   </h5>}
+           {issearch && <div className="d-flex justify-content-center flex-wrap">
              {cproducts && products.length > 0 &&
                  cproducts.map((item, index) => {
                     
@@ -119,10 +136,9 @@ const handleProduct = (id) =>{
                     )
                     })}
 
-                  </div>
+                  </div>}
 
-                  <h5> ALL RESULTS </h5>
-             <div className="d-flex justify-content-center flex-wrap">
+                 {!issearch && <div className="d-flex justify-content-center flex-wrap">
              {products && products.length > 0 &&
                  products.map((item, index) => {
                     
@@ -139,7 +155,7 @@ const handleProduct = (id) =>{
                     )
                     })}
 
-                  </div> 
+                  </div> }
                   
                   </div>
 )

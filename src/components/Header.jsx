@@ -40,7 +40,7 @@ function Header (props){
               </Link> }
 
               { !!localStorage.getItem('token') && 
-           <Link  to="/liked-product">
+           <Link  to="/liked-products">
              <button className="logout-btn"> LIKED PRODUCTS </button> 
               </Link> }
             

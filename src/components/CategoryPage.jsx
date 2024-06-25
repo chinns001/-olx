@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Categories from "./Categories";
 import { FaHeart } from "react-icons/fa";
 import "./Home.css";
-function Home() {
+
+function CategoryPage() {
   const navigate = useNavigate();
+
+  const param = useParams();
+  console.log(param);
 
   const [products, setproducts] = useState([]);
   const [cproducts, setcproducts] = useState([]);
@@ -22,7 +26,7 @@ function Home() {
   // },    [])
 
   useEffect(() => {
-    const url = "http://localhost:8000/get-products";
+    const url = "http://localhost:8000/get-products?catName=" + param.catName;
     axios
       .get(url)
       .then((res) => {
@@ -33,7 +37,7 @@ function Home() {
       .catch((err) => {
         alert("Server Err.");
       });
-  }, []);
+  }, [param]);
 
   const handlesearch = (value) => {
     setsearch(value);
@@ -100,8 +104,10 @@ function Home() {
       <Categories handleCategory={handleCategory} />
       {issearch && cproducts && (
         <h5>
+          
           SEARCH RESULT
           <button className="clear-btn" onClick={() => setissearch(false)}>
+          
             CLEAR
           </button>
         </h5>
@@ -128,7 +134,8 @@ function Home() {
                     src={"http://localhost:8000/" + item.pimage}
                   />
                   <p className="m-2">
-                    {item.pname} | {item.category}
+                    {" "}
+                    {item.pname} | {item.category}{" "}
                   </p>
                   <h3 className="m-2 text-danger"> {item.price} </h3>
                   <p className=" m-2 text-success"> {item.pdesc} </p>
@@ -144,11 +151,7 @@ function Home() {
             products.length > 0 &&
             products.map((item, index) => {
               return (
-                <div
-                  onClick={(id) => handleProduct(item._id)}
-                  key={item._id}
-                  className="card m-3"
-                >
+                <div key={item._id} className="card m-3">
                   <div
                     onClick={() => handleLike(item._id)}
                     className="icon-con"
@@ -156,13 +159,15 @@ function Home() {
                     <FaHeart className="icons" />
                   </div>
                   <img
+                    onClick={(id) => handleProduct(item._id)}
                     width="300px"
                     height="200px"
                     src={"http://localhost:8000/" + item.pimage}
                   />
                   <h3 className="m-2 price-text"> $ {item.price} </h3>
                   <p className="m-2">
-                    {item.pname} | {item.category}
+                    {" "}
+                    {item.pname} | {item.category}{" "}
                   </p>
                   <p className=" m-2 text-success"> {item.pdesc} </p>
                 </div>
@@ -173,4 +178,4 @@ function Home() {
     </div>
   );
 }
-export default Home;
+export default CategoryPage;

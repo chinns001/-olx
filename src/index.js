@@ -1,6 +1,4 @@
-
-
-import './index.css';
+import "./index.css";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -9,50 +7,53 @@ import {
   Rout,
   Link,
 } from "react-router-dom";
-import Home from './components/Home';
-import Login from './components/Login';
-import Signup from './components/Signup.';
-import AddProduct from './components/AddProduct';
-import LikedProducts from './components/LikedProducts';
-import ProductDetail from './components/ProductDetail';
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup.";
+import AddProduct from "./components/AddProduct";
+import LikedProducts from "./components/LikedProducts";
+import ProductDetail from "./components/ProductDetail";
+import CategoryPage from "./components/CategoryPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: ( <Home />),
+    element: <Home />,
+  },
+
+  {
+    path: "/category/:catName",
+    element: <CategoryPage />,
   },
   
   {
     path: "about",
-    element: <div>About</div>, 
+    element: <div>About</div>,
   },
 
   {
     path: "/login",
-    element: (<Login />),
+    element: <Login />,
   },
   {
     path: "/signup",
-    element: (<Signup />),
+    element: <Signup />,
   },
   {
     path: "/add-product",
-    element: (<AddProduct />),
+    element: <AddProduct />,
   },
   {
     path: "/liked-products",
-    element: (<LikedProducts />),
+    element: <LikedProducts />,
   },
 
   {
     path: "/product/:productId",
-    element: (<ProductDetail />),
+    element: <ProductDetail />,
   },
-
-
 ]);
 
 createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
-

@@ -40,7 +40,7 @@ function Home() {
   };
 
   const handleClick = () => {
-    const url = "http://localhost:8000/search?search=" + search;
+    const url = "http://localhost:8000/search?search=" + search +'&loc=' + localStorage.getItem('userLoc');
     axios
       .get(url)
       .then((res) => {
@@ -71,7 +71,10 @@ function Home() {
   };
   const handleLike = (productId) => {
     let userId = localStorage.getItem("userId");
-    console.log("userId", "productid");
+   if (!userId){
+    alert('Please Login first.')
+    return;
+   }
 
     const url = "http://localhost:8000/like-product";
     const data = { userId, productId };
@@ -145,17 +148,17 @@ function Home() {
             products.map((item, index) => {
               return (
                 <div
-                  onClick={(id) => handleProduct(item._id)}
-                  key={item._id}
-                  className="card m-3"
+                key={item._id}
+                className="card m-3"
                 >
                   <div
-                    onClick={() => handleLike(item._id)}
+                    onClick={(e) => handleLike(item._id) && e.stopPropagation() }
                     className="icon-con"
-                  >
+                    >
                     <FaHeart className="icons" />
                   </div>
                   <img
+                    onClick={(id) => handleProduct(item._id)}
                     width="300px"
                     height="200px"
                     src={"http://localhost:8000/" + item.pimage}
